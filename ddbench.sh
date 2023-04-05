@@ -8,7 +8,7 @@ read -p "Enter the number of runs: " runs
 block_size=$(echo "$block_size" | tr 'kmgtp' 'KMGTP')
 
 
-echo "Running dd benchmark..."
+echo "Running dd-benchmark..."
 
 echo "Starting dd-write..."
 temp_file=$(mktemp)
@@ -17,7 +17,7 @@ for i in $(seq 1 $runs); do
     if echo "$speed" | grep -q "GB"; then
         speed=$(echo "$speed" | awk '{printf("%.0f MB/s", $1 * 1024)}')
     fi
-    echo "Run $i speed: $speed" | tee -a "$temp_file"
+    echo "Run $i's speed: $speed" | tee -a "$temp_file"
 done
 
 awk '{if($5 == "PB/s") s += $4 * 1024 * 1024 * 1024; else if($5 == "TB/s") s += $4 * 1024 * 1024; else if($5 == "GB/s") s += $4 * 1024; else if($5 == "kB/s") s += $4 / 1024; else s += $4} END {printf("Average speed: %.2f MB/s\n", s/NR)}' "$temp_file"
@@ -33,7 +33,7 @@ for i in $(seq 1 $runs); do
     if echo "$speed" | grep -q "GB"; then
         speed=$(echo "$speed" | awk '{printf("%.0f MB/s", $1 * 1024)}')
     fi
-    echo "Run $i speed: $speed" | tee -a "$temp_file"
+    echo "Run $i's speed: $speed" | tee -a "$temp_file"
 done
 
 awk '{if($5 == "PB/s") s += $4 * 1024 * 1024 * 1024; else if($5 == "TB/s") s += $4 * 1024 * 1024; else if($5 == "GB/s") s += $4 * 1024; else if($5 == "kB/s") s += $4 / 1024; else s += $4} END {printf("Average speed: %.2f MB/s\n", s/NR)}' "$temp_file"
