@@ -51,3 +51,4 @@ s|^(trust_hash[[:space:]]+=[[:space:]]+).*$|\1\"$TRUST_HASH\"|" $HOME/$COIN/conf
 
 echo "Statesync info has been updated for $CHAIN_ID"
 echo "Don't forget to disable statesync after completion!"
+sleep 2
