@@ -3,7 +3,14 @@
 # This script was designed to setup a fresh Debian 11/12 installation for production use.
 # Nothing in this script is guaranteed, and best practices are slowly being added.
 # Reach out to boobcactus with questions or concerns.
- 
+
+# SUDO CHECK
+if [ "$UID" -ne 0 ]; then
+    echo "Error: This script must be run with sudo."
+    exit 1
+fi
+
+# BEGIN HOST CONFIGURATION
 read -p "What is the server's hostname? " HOSTNAME
 read -rsp "Please provide a new root password: " ROOTPASS
 echo -e "\n\c"
