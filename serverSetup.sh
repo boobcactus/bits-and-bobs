@@ -19,10 +19,10 @@ echo -e "\n\c"
 sudo apt update && sudo apt upgrade -y && sudo apt install git curl wget aria2 ufw make build-essential jq lz4 sudo -y
 sudo timedatectl set-timezone UTC
 echo "Timezone set to UTC."
-sudo useradd -m -s /bin/bash user 
-sudo usermod -aG sudo user
 echo "root:$ROOTPASS" | sudo chpasswd
 echo "Root password updated."
+sudo useradd -m -s /bin/bash user 
+sudo usermod -aG sudo user
 echo "user:$USERPASS" | sudo chpasswd
 echo "Sudo user created and password updated."
 
