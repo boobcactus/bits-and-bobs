@@ -5,18 +5,18 @@
 # Reach out to boobcactus with questions or concerns.
  
 read -p "What is the server's hostname? " HOSTNAME
-echo " "
 read -rsp "Please provide a new root password: " ROOTPASS
-echo " "
+echo -e "\n\c"
 read -rsp "Now provide a password for the sudo user account: " USERPASS
-echo "root:$ROOTPASS" | chpasswd
+echo -e "\n\c"
+echo "root:$ROOTPASS" | sudo chpasswd
 echo "Root password updated."
-apt update && apt upgrade -y && apt install sudo apt install git curl wget aria2 ufw make build-essential jq lz4 -y
+sudo apt update && sudo apt upgrade -y && sudo apt install git curl wget aria2 ufw make build-essential jq lz4 sudo -y
 echo "Updates installed."
-timedatectl set-timezone UTC
+sudo timedatectl set-timezone UTC
 echo "Timezone set to UTC."
-useradd -m -s /bin/bash user && usermod -aG sudo user
-echo "user:$USERPASS" | chpasswd
+sudo useradd -m -s /bin/bash user && sudo usermod -aG sudo user
+echo "user:$USERPASS" | sudo chpasswd
 echo "Sudo user created and password updated."
 
 # BEGIN GO INSTALLATION
