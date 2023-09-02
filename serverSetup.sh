@@ -16,18 +16,18 @@ read -rsp "Please provide a new root password: " ROOTPASS
 echo -e "\n\c"
 read -rsp "Now provide a password for the sudo user account: " USERPASS
 echo -e "\n\c"
-echo "root:$ROOTPASS" | sudo chpasswd
-echo "Root password updated."
 sudo apt update && sudo apt upgrade -y && sudo apt install git curl wget aria2 ufw make build-essential jq lz4 sudo -y
-echo "Updates installed."
 sudo timedatectl set-timezone UTC
 echo "Timezone set to UTC."
-sudo useradd -m -s /bin/bash user && sudo usermod -aG sudo user
+sudo useradd -m -s /bin/bash user 
+sudo usermod -aG sudo user
+echo "root:$ROOTPASS" | sudo chpasswd
+echo "Root password updated."
 echo "user:$USERPASS" | sudo chpasswd
 echo "Sudo user created and password updated."
 
 # BEGIN GO INSTALLATION
-mkdir go && mkdir ~/go/bin
+mkdir /home/user/go && mkdir /home/user/go/bin
 LATEST_VERSION=$(curl -s https://go.dev/dl/ | grep -oP 'go\d+\.\d+\.\d+' | head -n 1)
 DOWNLOAD_URL="https://go.dev/dl/${LATEST_VERSION}.linux-amd64.tar.gz"
 wget $DOWNLOAD_URL && sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf ${LATEST_VERSION}.linux-amd64.tar.gz
@@ -36,7 +36,6 @@ export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:/home/user/go/bin
 source ~/.bashrc
 echo "$LATEST_VERSION has been installed."
-exit #back to root
 
 # BEGIN SSH CONFIGURATION
 sed -i 's/PermitRootLogin yes/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
