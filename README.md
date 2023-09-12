@@ -1,3 +1,3 @@
-# bits-and-bobs
+# scripts
 
-A collection of scripts designed to simplify system administration or blockchain node deployment.
+A collection of scripts designed to simplify system administration and blockchain node deployment.
