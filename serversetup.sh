@@ -144,6 +144,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 file="/etc/fail2ban/jail.local"
+sed -i 's|backend = auto|backend = systemd|g' "$file"
 sed -i 's|bantime  = 10m|bantime  = 11m|g' "$file"
 sed -i 's|maxretry = 5|maxretry = 7|g' "$file"
 sed -i 's|port    = ssh|port    = 2222|' "$file"
