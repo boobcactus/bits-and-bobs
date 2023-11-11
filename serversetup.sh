@@ -99,7 +99,7 @@ fi
 echo "$LATEST_VERSION has been installed."
 
 # BEGIN SSH CONFIGURATION
-sed -i 's/PermitRootLogin yes/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
+sed -i 's/#PermitRootLogin yes/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config
 sed -i 's/#MaxSessions 10/MaxSessions 5/' /etc/ssh/sshd_config
 sed -i 's/#Port 22/Port 2222/' /etc/ssh/sshd_config
 sed -i 's/#UseDNS no/UseDNS no/' /etc/ssh/sshd_config
