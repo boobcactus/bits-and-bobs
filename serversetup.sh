@@ -45,12 +45,22 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 echo "Root password updated."
-sudo useradd -m -s /bin/bash user && sudo usermod -aG sudo user && echo "user:$USERPASS" | sudo chpasswd
-if [ $? -ne 0 ]; then
-    echo "Error: Failed to create the sudo user or set the user password."
-    exit 1
+if id "user" &>/dev/null; then
+    echo "User 'user' already exists. Updating password."
+    echo "user:$USERPASS" | sudo chpasswd
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to update the password for user 'user'."
+        exit 1
+    fi
+else
+    echo "User 'user' does not exist. Creating user and setting password."
+    sudo useradd -m -s /bin/bash user && sudo usermod -aG sudo user && echo "user:$USERPASS" | sudo chpasswd
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to create the sudo user 'user' or set the user password."
+        exit 1
+    fi
 fi
-echo "Sudo user created and password updated."
+echo "Sudo user 'user' created and password updated."
 
 # BEGIN GO INSTALLATION
 if [ ! -d "/home/user/go" ]; then
