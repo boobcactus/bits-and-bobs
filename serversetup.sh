@@ -148,8 +148,6 @@ sed -i 's|backend = auto|backend = systemd|g' "$file"
 sed -i 's|bantime  = 10m|bantime  = 11m|g' "$file"
 sed -i 's|maxretry = 5|maxretry = 7|g' "$file"
 sed -i 's|port    = ssh|port    = 2222|' "$file"
-sed -i 's|logpath = %(sshd_log)s|logpath = /var/log/audit/audit.log|' "$file"
-sed -i '/\[nginx-http-auth\]/{N;N;s/\nport    = http,https/\nenabled = true\nport    = http,https/}' "$file"
 if [ $? -ne 0 ]; then
     echo "Error: Failed to modify the Fail2Ban configuration file."
     exit 1
