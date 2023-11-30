@@ -10,3 +10,6 @@ lxc exec mongodb -- /bin/bash
 lxc config device add mycontainer myport80 proxy listen=tcp:0.0.0.0:80 connect=tcp:127.0.0.1:80
 
 lxc config device add mongodb mongoport proxy listen=tcp:0.0.0.0:27017 connect=tcp:127.0.0.1:27017
+
+export LANG=es_ES.UTF-8
+(check for different lang first)
